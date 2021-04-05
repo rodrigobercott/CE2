@@ -1,0 +1,315 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Escreva o número de sua matricula170021688\n",
+      "Você deverá entregar os exercícios:  [176, 175]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import random\n",
+    "\n",
+    "def escolhe(matricula):\n",
+    "    random.seed(matricula)\n",
+    "    cap1 = (2,8,9,11,12,15,16,18,20,21,22,24,26,27,28,30,31,32)    \n",
+    "    cap2 = (36,40,44,45,46,48,50,51,53,55,56,57,59,60)\n",
+    "    cap3 = (63,64,65,68,71,72,74,76,78,80,81,84)\n",
+    "    cap4 = (85,86,87,89,91,92,94,97,99,101,103,104,106)\n",
+    "    cap5 = (111,115,117,118,119,122,123,124,126,127,131,132,133)\n",
+    "    cap6 = (138,139,140,141,144,147,148)\n",
+    "    cap7 = (152,153,154,155,157,160,161,164,165,166,168,171,172)\n",
+    "    cap8 = (174,175,176,177,179,181,182,185)\n",
+    "    return(random.sample(cap8, k=2))\n",
+    "\n",
+    "print(\"Você deverá entregar os exercícios: \", escolhe(input(\"Escreva o número de sua matricula\")))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### EXERCÍCIOS OBRIGATÓRIOS"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### EXERCÍCIO 175: Recursive Decimal to Binary\n",
+    "In Exercise 82 you wrote a program that used a loop to convert a decimal number to its binary representation. In this exercise you will perform the same task using\n",
+    "recursion.\n",
+    "Write a recursive function that converts a non-negative decimal number to binary.\n",
+    "Treat 0 and 1 as base cases which return a string containing the appropriate digit. For all other positive integers, n, you should compute the next digit using the remainder operator and then make a recursive call to compute the digits of n // 2. Finally, you should concatenate the result of the recursive call (which will be a string) and the next digit (which you will need to convert to a string) and return this string as the result of the function.\n",
+    "Write a main program that uses your recursive function to convert a non-negative integer entered by the user from decimal to binary. Your program should display an appropriate error message if the user enters a negative value."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Entre um inteiro: 50\n",
+      "110010"
+     ]
+    }
+   ],
+   "source": [
+    "def binary(n):\n",
+    "   if n > 1:\n",
+    "       binary(n//2)\n",
+    "   print(n % 2,end = '')\n",
+    " \n",
+    "dec = int(input(\"Entre um inteiro: \"))\n",
+    "binary(dec)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### EXERCÍCIO 176: The NATO Phonetic Alphabet\n",
+    "A spelling alphabet is a set of words, each of which stands for one of the 26 letters in the alphabet. While many letters are easily misheard over a low quality or noisy communication channel, the words used to represent the letters in a spelling alphabet are generally chosen so that each sounds distinct and is difficult to confuse with any other. The NATO phonetic alphabet is a widely used spelling alphabet. Each letter\n",
+    "and its associated word is shown in Table 8.1.\n",
+    "Write a program that reads a word from the user and then displays its phonetic\n",
+    "spelling. For example, if the user enters Hello then the program should output Hotel Echo Lima Lima Oscar. Your program should use a recursive func- tion to perform this task. Do not use a loop anywhere in your solution. Any non-letter characters entered by the user should be ignored."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Palavra:Rodrigo\n",
+      "Romeo Oscar Delta Romeo India Golf Oscar \n"
+     ]
+    }
+   ],
+   "source": [
+    "import re\n",
+    "def convert2nato(string):\n",
+    "    string = re.sub(r'\\W', '', string.upper())\n",
+    "    nato = {'A':'Alpha', 'B':'Bravo','C':'Charlie', 'D':'Delta', 'E':'Echo', 'F':'Foxtrot', \n",
+    "            'G':'Golf',\"H\":\"Hotel\", 'I':'India', 'J':'Juliet', 'K':'Kilo', 'L':'Lima', \n",
+    "            'M':'Mike', 'N':'November', 'O':'Oscar', 'P':'Papa', 'Q':'Quebec',\n",
+    "            'R':'Romeo', 'S':'Sierra', 'T':'Tango', 'U':'Uniform', 'V':'Victor', \n",
+    "            'W':'Whiskey', 'X':'Xray', 'Y':'Yankee', 'Z':'Zulu'}\n",
+    "    if not string:\n",
+    "        return ''\n",
+    "    return nato[string[0]] + ' ' + convert2nato(string[1:])\n",
+    "\n",
+    "inp = input('Palavra:')\n",
+    "print(convert2nato(inp))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### EXERCÍCIOS OPTATIVOS"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### EXERCÍCIO 174: Greatest Common Divisor\n",
+    "Euclid was a Greek mathematician who lived approximately 2,300 years ago. His algorithm for computing the greatest common divisor of two positive integers, a and b, is both efficient and recursive. It is outlined below:\n",
+    "\n",
+    "If b is 0 then Return a Else Set c equal to the remainder when a is divided by b Return the greatest common divisor of b and c Write a program that implements Euclid’s algorithm and uses it to determine the greatest common divisor of two integers entered by the user. Test your program with some very large integers. The result will be computed quickly, even for huge numbers consisting of hundreds of digits, because Euclid’s algorithm is extremely efficient."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Número 1:48\n",
+      "Número 2:60\n",
+      "O mdc é: 12\n"
+     ]
+    }
+   ],
+   "source": [
+    "def hcfnaive(a,b):\n",
+    "    if(b==0):\n",
+    "        return a\n",
+    "    else:\n",
+    "        return hcfnaive(b,a%b)\n",
+    "a = int(input(\"Número 1:\")) \n",
+    "b = int(input(\"Número 2:\"))\n",
+    "  \n",
+    "print (\"O mdc é: \",end=\"\")\n",
+    "print (hcfnaive(a,b))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### EXERCÍCIO 177: Roman Numerals\n",
+    "As the name implies, Roman numerals were developed in ancient Rome. Even after the Roman empire fell, its numerals continued to be widely used in Europe until the late middle ages, and its numerals are still used in limited circumstances today. Roman numerals are constructed from the letters M, D, C, L, X, V and I which represent 1000, 500, 100, 50, 10, 5 and 1 respectively. The numerals are generally written from largest value to smallest value. When this occurs the value of the number is the sum of the values of all of its numerals. If a smaller value precedes a larger value then the smaller value is subtracted from the larger value that it immediately precedes, and that difference is added to the value of the number.1 Create a recursive function that converts a Roman numeral to an integer. Your function should process one or two characters at the beginning of the string, and then call itself recursively on all of the unprocessed characters. Use an empty string, which has the value 0, for the base case. In addition, write a main program that reads a Roman numeral from the user and displays its value. You can assume that the value entered by the user is valid. Your program does not need to do any error checking."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Número Romano:XXIV\n",
+      "24\n"
+     ]
+    }
+   ],
+   "source": [
+    "class romano_int:\n",
+    "    def roman_to_int(self, s):\n",
+    "        rom_val = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}\n",
+    "        int_val = 0\n",
+    "        for i in range(len(s)):\n",
+    "            if i > 0 and rom_val[s[i]] > rom_val[s[i - 1]]:\n",
+    "                int_val += rom_val[s[i]] - 2 * rom_val[s[i - 1]]\n",
+    "            else:\n",
+    "                int_val += rom_val[s[i]]\n",
+    "        return int_val\n",
+    "\n",
+    "print(romano_int().roman_to_int(input(\"Número Romano:\")))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Exercício 179: Recursive Square Root\n",
+    "Exercise 74 explored how iteration can be used to compute the square root of a number. In that exercise a better approximation of the square root was generated with each additional loop iteration. In this exercise you will use the same approximation\n",
+    "strategy, but you will use recursion instead of a loop.\n",
+    "Create a square root function with two parameters. The first parameter, n, will\n",
+    "be the number for which the square root is being computed. The second parameter, guess, will be the current guess for the square root. The guess parameter should have a default value of 1.0. Do not provide a default value for the first parameter.\n",
+    "Your square root function will be recursive. The base case occurs when guess2 is\n",
+    "within 10−12 of n. In this case your function should return guess because it is close\n",
+    "enough to the square root of n. Otherwise your function should return the result of\n",
+    "guess+ n calling itself recursively with n as the first parameter and parameter.\n",
+    "2 guess as the second\n",
+    "Write a main program that demonstrate your square root function by computing the square root of several different values. When you call your square root function from the main program you should only pass one parameter to it so that the default value is used for guess."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "5\n"
+     ]
+    }
+   ],
+   "source": [
+    "def sqrtSearch(low, high, N) : \n",
+    "      if (low <= high) :\n",
+    "        mid = (low + high) // 2; \n",
+    " \n",
+    "        if ((mid * mid <= N) and ((mid + 1) * (mid + 1) > N)) :\n",
+    "            return mid; \n",
+    "\n",
+    "        elif (mid * mid < N) : \n",
+    "            return sqrtSearch(mid + 1, high, N); \n",
+    "      \n",
+    "        else :\n",
+    "            return sqrtSearch(low, mid - 1, N); \n",
+    "  \n",
+    "    return low; \n",
+    "  \n",
+    "if __name__ == \"__main__\" : \n",
+    "  \n",
+    "    N = 25; \n",
+    "    print(sqrtSearch(0, N, N)) "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Exercício 185: Run-Length Decoding\n",
+    "Run-length encoding is a simple data compression technique that can be effec- tive when repeated values occur at adjacent positions within a list. Compression is achieved by replacing groups of repeated values with one copy of the value, fol- lowed by the number of times that it should be repeated. For example, the list [\"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"B\", \"B\", \"B\",\"B\",\"A\",\"A\",\"A\",\"A\",\"A\",\"A\",\"B\"]would be compressed as [\"A\",12,\"B\",4,\"A\",6,\"B\",1]. Decompression is performed by repli-\n",
+    "cating each value in the list the number of times indicated.\n",
+    "Write a recursive function that decompresses a run-length encoded list. Your recursive function will take a run-length compressed list as its only argument. It will return the decompressed list as its only result. Create a main program that displays a run-length encoded list and the result of decoding it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "BBBBAAADDCBB\n"
+     ]
+    }
+   ],
+   "source": [
+    "class Solution:\n",
+    "   def solve(self, s):\n",
+    "      output = \"\"\n",
+    "      num=\"\"\n",
+    "      for i in s:\n",
+    "         if i.isalpha():\n",
+    "            output+=i*int(num)\n",
+    "            num=\"\"\n",
+    "         else:\n",
+    "            num+=i\n",
+    "      return output\n",
+    "ob = Solution() \n",
+    "print(ob.solve(\"4B3A2D1C2B\"))"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
